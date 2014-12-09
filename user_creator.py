@@ -43,7 +43,10 @@ for x in range(500):
 	record = 'dsadd user CN="' + samName + str(samAname) + ',' + pth + '" -upn ' + samName+ '@pfoxcorp.local' +' -empid '\
 	+ str(employeeID) +' -pwd P@ssw0rd2@ -fn ' + first + ' -ln ' + last + ' -display ' +\
 	'"' + name + '"' + ' -email ' + samName+str(samAname) + '@doesn0tex1st.com' + \
-	' -pwdneverexpires yes' + ' -disabled no' + ' -acctexpires never'
+	' -pwdneverexpires yes -disabled no -acctexpires never'
+	
+	"""check for the record that was just created in the output list, if record exists, create another one, if not, write
+	the output to the list for recording"""
 	if record not in output:
 		output.append(record)
 
