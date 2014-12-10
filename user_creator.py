@@ -9,13 +9,13 @@ Name, samAccountName, Description, Department, EmployeeID, Path, and Enabled
 """
 Values to generate random names
 """
-fname = ["Bob","John","Tom","Jack","Jill","Sam","Bill","Jerry","Frank","Thomas","Lucas"]
-lname = ["Smith","Jones","Davis","Fox","Chang","Washington","Adams","Jefferson","Skywalker","Palpatine"]
-samAname = 0
-description = ["Sales","Support","Engineer","Administration"]
+fname = ["Bob","John","Tom","Jack","Jill","Sam","Bill","Jerry","Frank","Thomas","Lucas","James","Andrew","David","Jim","Sean"]
+lname = ["Smith","Jones","Davis","Fox","Johnson","Washington","Adams","Jefferson","Skywalker","Brown","Miller","Wilson","King","Baker",]
+samCount = 0
 department = ["Sales","Support","Engineering","Administration"]
 employeeID = 1000
-path = ["OU=support,DC=pfoxcorp,DC=local","OU=sales,DC=pfoxcorp,DC=local","OU=engineering,DC=pfoxcorp,DC=local","OU=administration,DC=pfoxcorp,DC=local"]
+path = ["OU=support","OU=sales","OU=engineering","OU=administration"]
+dc = ",DC=pfoxcorp,DC=local"
 enabled = "True"
 output = []
 
@@ -35,14 +35,13 @@ for x in range(500):
 	name = first + " " + last
 	samName = str.lower(first+last+str(samAname))
 	samAname += 1
-	desc = random.choice(description)
 	depa = random.choice(department)
 	emp = str(employeeID)
 	employeeID += 10
 	pth = random.choice(path)
-	record = 'dsadd user CN="' + samName + str(samAname) + ',' + pth + '" -upn ' + samName+ '@pfoxcorp.local' +' -empid '\
+	record = 'dsadd user CN="' + samName + str(samCount) + ',' + pth + dc + '" -upn ' + samName+ '@pfoxcorp.local' +' -empid '\
 	+ str(employeeID) +' -pwd P@ssw0rd2@ -fn ' + first + ' -ln ' + last + ' -display ' +\
-	'"' + name + '"' + ' -email ' + samName+str(samAname) + '@doesn0tex1st.com' + \
+	'"' + name + '"' + ' -email ' + samName+str(samCount) + '@doesn0tex1st.com' + \
 	' -pwdneverexpires yes -disabled no -acctexpires never'
 	
 	"""check for the record that was just created in the output list, if record exists, create another one, if not, write
